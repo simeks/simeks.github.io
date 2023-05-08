@@ -2,8 +2,5 @@ title: Stuff
 author: Simon Ekström
 theme: minima
 
-minima:
-  social_links:
-    - { platform: github,   user_url: "https://github.com/simeks" }
-    - { platform: linkedin, user_url: "https://linkedin.com/in/simon-ekstr%C3%B6m-61614592" }
-  
+github_username: simeks
+linkedin_username: "simon-ekstr%C3%B6m-61614592"
