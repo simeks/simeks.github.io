@@ -1,5 +1,0 @@
----
-title: Stuff
----
-
-Hello world!
