@@ -3,3 +3,5 @@ author: Simon Ekström
 theme: minima
 
 github_username: simeks
+
+show_excerpts: true
