@@ -1,6 +1,7 @@
 ---
 title: "Culling of custom objects in Bevy"
 date: 2023-05-13
+excerpt_separator: <!--more-->
 ---
 
 # Culling of custom components in Bevy
@@ -17,7 +18,7 @@ pub struct VolumeBundle {
     pub computed_visibility: ComputedVisibility,
 }
 ```
-
+<!--more-->
 Now to the systems I needed to implement. First, I had to add a system that fetches the bounds for the culling itself. I made a `calculate_bounds` system and made sure to have it run when Bevy expects it to run (`VisibilitySystems::CalculateBounds`).
 ```rs
 app
