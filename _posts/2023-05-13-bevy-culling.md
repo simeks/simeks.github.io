@@ -4,8 +4,6 @@ date: 2023-05-13
 excerpt_separator: <!--more-->
 ---
 
-# Culling of custom components in Bevy
-
 I've been doing some experimentation with volume rendering in Bevy (v0.10.1) and I wanted to make my own representation of the actual rendered objects. I still wanted to have the regular visibility culling stage of Bevy to be performed on my volumes so here's a brief walkthrough of how I enabled culling for my non-mesh components.
 
 First off, this is how a volume instance is represented in the ECS. It's fairly similar to how meshes are setup. We have a reference to the actual volume asset, transformations, and the visibility components. As with using meshes in Bevy, I typically don't have to care about anything else than `volume` and `transform` when actually using this bundle.

@@ -4,8 +4,6 @@ date: 2023-05-19
 excerpt_separator: <!--more-->
 ---
 
-# Deferred shading with compute shaders in Bevy
-
 ![Lights](/images/2023-05-19-screenshot.png){:width="90%" height="90%"}
 
 I've been experimenting with my ray casting voxel renderer in Bevy and one of the things I've been looking into is a deferred approach for lighting the scene. This post just briefly goes through some background and the steps I took to implement this in Bevy v0.10.1, and it mostly focues on the Bevy render graph. Disclaimer: Since I've opted for running all my rendering in compute shaders, a lot of the decisions below are due to Bevy being designed with the traditional rendering flow in mind (and rightfully so).
