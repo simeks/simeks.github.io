@@ -12,20 +12,19 @@ I've been experimenting with my ray casting voxel renderer in Bevy and one of th
 
 <!--more-->
 
-For the rendering, Bevy sets up the rendering flow through a typical render graph. Meaning you build the rendering flow by connecting various nodes. The graph then ensures they are performed in correct order. The default render graph for 3D in Bevy looks something like this:
+For the rendering, Bevy sets up the rendering flow through a typical render graph. Meaning you build the rendering flow by connecting various nodes. The graph then ensures they are performed in correct order. 
+
 ![Bevy pipeline](/images/2023-05-19-bevy-pipeline.svg)
 
-The `Prepass` is a node performing a prepass, this node can for instance run a depth prepass of the view. The `MainPass3d` node sets up render passes for the three core render phases: `Opaque3d`, `AlphaMask3d`, and `Transparent3d`, dispatching any queued up draw calls. This is where the main render logic ends up. For instance, Bevy provides clustered forward rendering through the `bevy_pbr` plugin. This plugin is responsible for setting up necessary shader pipelines and ensuring draw calls and necessary resources are queued up each frame.
+The figure above illustrates the default render graph for 3D in Bevy. The `Prepass` is a node performing a prepass, this node can for instance run a depth prepass of the view. The `MainPass3d` node sets up render passes for the three core render phases: `Opaque3d`, `AlphaMask3d`, and `Transparent3d`, dispatching any queued up draw calls. This is where the main render logic ends up. For instance, Bevy provides clustered forward rendering through the `bevy_pbr` plugin. This plugin is responsible for setting up necessary shader pipelines and ensuring draw calls and necessary resources are queued up each frame.
 
 I won't go into much detail about `bevy_pbr` simply because I've decided to opt-out from that plugin. The reason being that `bevy_pbr` is designed around the traditional render passes and I wasn't able to fit my ray caster into that framework. I decided to scratch the `MainPass3d` node in my render graph for the same reason, since it's built to run render passes, and not compute. 
 
 As mentioned, Bevy implements clustered forward rendering, which basically means that you render your geometry and calculate your lighting in a single pass. Deferred rendering on the other hand splits the rendering into two phases; first you render the geometry, then you calculate the lighting.  There are a lot of pros and cons for both approaches that I won't go into here. The reason I opted for deferred shading is that I only need to do the scene rendering once, which is fairly expensive, but I'll still be quite flexible with what I can do in later passes.
 
-So, now I've set up my own render graph, which looks something like this:
-
 ![My pipeline](/images/2023-05-19-my-pipeline.svg)
 
-I decided to not scrap the whole default pipeline, since it would be nice to be able to use any post-processing nodes provided in Bevy. However, I removed `Prepass` and `MainPass3d` replacing them with two new nodes; `Ray casting` and `Lighting`. The first node is my compute shader that renders my scene using ray casting and stores the results into my gbuffer, which for now consists of albedo, normals, and depth. The second node, which is still quite simple, applies lighting on my scene. The result of the lighting then goes through the postprocessing steps just as usual.
+After creating my own graph I ended up with something as illustrated in the image above. I decided to not scrap the whole default pipeline, since it would be nice to be able to use any post-processing nodes provided in Bevy. However, I removed `Prepass` and `MainPass3d` replacing them with two new nodes; `Ray casting` and `Lighting`. The first node is my compute shader that renders my scene using ray casting and stores the results into my gbuffer, which for now consists of albedo, normals, and depth. The second node, which is still quite simple, applies lighting on my scene. The result of the lighting then goes through the postprocessing steps just as usual.
 
 Now for the actual implementation. I decided to setup a completely new graph with all the nodes I needed. In Bevy 0.10 this is quite a verbose procedure, but they are improving this in 0.11:
 
