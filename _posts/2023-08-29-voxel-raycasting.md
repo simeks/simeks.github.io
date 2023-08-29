@@ -4,7 +4,7 @@ date: 2023-08-29
 excerpt_separator: <!--more-->
 ---
 
-![Lights](/images/![Alt text](/images/2023-08-29-svo-overview.png)){:width="90%" height="90%"}
+![Voxels](/images/2023-08-29-svo-overview.png){:width="90%" height="90%"}
 
 Voxels are great! Working in medical imaging, I encounter voxels on a daily basis. The medical images I work with are mostly volumetric data represented by voxels. Given the simplicity of voxels (think pixel, but in 3D), they are easy to work with for a lot of things. Now, one of the things I do is visualization of these images, such as rendering of a volume through raycasting. With that said, this post is not about medical visualization, the visualization I want to write about is more the kind you would see in video games.
 
