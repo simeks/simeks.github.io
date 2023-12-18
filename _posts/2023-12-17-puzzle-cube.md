@@ -28,14 +28,14 @@ Sounds simple enough!
 
 However, when you start looking at the problem in detail you see it for the combinatory nightmare it is. If we just consider the ways to place a single piece into a cube, there are up to 24 unique orientations of the piece and with 
 
-There are 13 pieces, each with up to 24 possible unique orientations. Combine this with the all the possible positions to place the cube. I wrote some rough code just to generate all the permutations of each piece and in the worst case there were 432 permutations for a single piece. With 13 pieces, doing an exhaustive search on all the combinations means you have to go through somewhere around $10^{30}$ permutations, maybe a bit less but way too many nonetheless.
+There are 13 pieces, each with up to 24 possible unique orientations. Combine this with the all the possible positions to place the cube. I wrote some rough code just to generate all the permutations of each piece and in the worst case there were 432 permutations for a single piece. With 13 pieces, doing an exhaustive search on all the combinations means you have to go through somewhere around `10^{30}` permutations, maybe a bit less but way too many nonetheless.
 
 Luckily we have some contraints that can elimate a large number of permutations. Puzzle pieces can not overlap eachother, and you are not allowed to have pieces sticking out of the cube. As mentioned early on, a big frustration of the puzzle was that half-way through you realize the current configuration of pieces simply forbids you from building further. At this point, you eliminate any permutations that branches out from this configuration.
 
 
 ## Setting up
 
-The first thing I did was to actually input all the pieces into a format my future solver would be able to parse. For simplicity I decided encode each piece as a bitmask. Each bit being a element of the cube, which in total holds $4x4x4=64$ bits. 1 marks bits occupied by the piece, and 0 is empty space.
+The first thing I did was to actually input all the pieces into a format my future solver would be able to parse. For simplicity I decided encode each piece as a bitmask. Each bit being a element of the cube, which in total holds `4x4x4=64` bits. 1 marks bits occupied by the piece, and 0 is empty space.
 
 I didn't do anything fancy for the actual input, I just manually "drew" the pieces from the picture above in a .txt:
 ```
@@ -49,7 +49,7 @@ I didn't do anything fancy for the actual input, I just manually "drew" the piec
 0000
 0000
 ```
-Since each piece was a maximum of 2 bits in depth, I decided to restrict each input to just be $4x4x2$. Briefly explained:
+Since each piece was a maximum of 2 bits in depth, I decided to restrict each input to just be `4x4x2`. Briefly explained:
 ```
 z y x: 0123
 0 0    0000
