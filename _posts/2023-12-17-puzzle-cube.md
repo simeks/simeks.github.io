@@ -146,3 +146,8 @@ Some things that I would like to look at in the future, but probably won't:
 * Performance aspects, having the `u64` representation and a lot of nice instructions for working with bits I suspect there are a lot of things you can do to speed things up. The memory structure is also very hastily put together so might be things to improve there as well.
 
 And finally, as promised, some related work: a colleague linked me similar work by a Scott Kurowski which ~~has~~ had some great writings on problems like this [here](https://web.archive.org/web/20220328162256/http://www.scottkurowski.com/BedlamCube/). After some more digging I even found a [wikipedia article](https://en.wikipedia.org/wiki/Bedlam_cube) that could've saved me a lot of time, but that's no fun :-).
+
+#### Update
+
+I have some resuts! After filtering out some duplicates (the search would produce the same solution for each cube orientation), the search algorithm produced **19,186** unique solutions! And it took around 90 minutes to find all of them, which isn't too shabby. This matches the previously [mentioned article](https://web.archive.org/web/20220328162256/http://www.scottkurowski.com/BedlamCube/), which is a good sign! That article also mentioned it took 86 hours on a 2 GHz Pentium 4, so this makes you really appreciate modern hardware.
+
