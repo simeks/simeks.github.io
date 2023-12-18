@@ -138,7 +138,7 @@ Using this the solution started rolling in very quickly (1000s in just a few sec
 
 My main goal was really just to generate a single solution so that I could end all my colleagues frustration once and for all, but as you go deeper there are so many other interesting aspects. As with all these types of problems, they are usually bigger then they look. Just the fact that there are thousands of solution is hard to imagine by just looking at the cube.
 
-I've put all the code related to this on my Github: https://github.com/simeks/bedlam-cube, it might not be in great shape but feel free to check it out. It's all written in [Rust](https://www.rust-lang.org/).
+I've put all the code related to this in a [github repo](https://github.com/simeks/bedlam-cube), it might not be in great shape but feel free to check it out. It's all written in [Rust](https://www.rust-lang.org/).
 
 Some things that I would like to look at in the future, but probably won't:
 
