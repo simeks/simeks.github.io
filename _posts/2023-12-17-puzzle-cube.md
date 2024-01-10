@@ -149,5 +149,11 @@ And finally, as promised, some related work: a colleague linked me similar work 
 
 #### Update
 
-I have some resuts! After filtering out some duplicates (the search would produce the same solution for each cube orientation), the search algorithm produced **19,186** unique solutions! And it took around 90 minutes to find all of them, which isn't too shabby. This matches the previously [mentioned article](https://web.archive.org/web/20220328162256/http://www.scottkurowski.com/BedlamCube/), which is a good sign! That article also mentioned it took 86 hours on a 2 GHz Pentium 4, so this makes you really appreciate modern hardware.
+I have some results! After filtering out some duplicates (the search would produce the same solution for each cube orientation), the search algorithm produced **19,186** unique solutions! And it took around 90 minutes to find all of them, which isn't too shabby. This matches the previously [mentioned article](https://web.archive.org/web/20220328162256/http://www.scottkurowski.com/BedlamCube/), which is a good sign! That article also mentioned it took 86 hours on a 2 GHz Pentium 4, so this makes you really appreciate modern hardware.
+
+#### Update 2
+
+Almost forgot, I physically put it together using one of the solutions as well and it was a great relief to see that it actually worked:
+
+![Puzzle pieces](/images/2023-12-17-puzzle-cube-solved.png){:width="50%" height="50%"}
 
