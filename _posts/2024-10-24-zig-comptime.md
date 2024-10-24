@@ -329,6 +329,40 @@ test "ExternTaggedUnion" {
 ```
 The above works, but I'm not sure the need for it is big enough that I might actually deploy it. One of the drawback of all of these is that it hides details that might be important. For instance, under certain circumstances you might want to layout the struct manually do avoid wasting bits.
 
+Tying this to the start of the post, using these extern structs together with our extern C functions is as simple as:
+```zig
+const Desc = extern struct {
+    textures: ExternArray(Texture, 4),
+};
+
+pub const Module = opaque {
+    const init = moduleInit;
+    extern fn moduleInit() *Module;
+
+    const deinit = moduleDeinit;
+    extern fn moduleDeinit(*Module);
+
+    const doStuff = moduleDoStuff;
+    extern fn moduleDoStuff(*Module, *Desc) void;
+};
+
+test {
+    const module = Module.init();
+    defer module.deinit();
+
+    const desc: Desc = .{
+        // Decl literals are amazing!
+        .textures = try .init(&{
+            .{ .width = 256, .height = 256 },
+            .{ .width = 256, .height = 256 },
+        }),
+    };
+
+    module.doStuff(&desc);
+}
+```
+
+
 On top of this I wrote a generator in Zig that is able to parse all these structs, unions, and enums to generate a C header file that is compatible with all these constructs so that I could actually use them. This was surprisingly easy, again thanks to comptime, but this will have to be the subject for another post.
 
 Necessary disclaimer: All code above is written for Zig 0.14.0-dev.1951+857383689 and might not work on older (or newer) versions. For instance decl literals were introduced recently and is only available in the dev builds (>=0.14).
