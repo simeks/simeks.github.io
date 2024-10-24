@@ -162,7 +162,7 @@ test "ExternArray" {
     };
     const desc: Desc = .{
         // Decl literals are amazing!
-        .textures = try .init(&{
+        .textures = try .init(&.{
             .{ .width = 256, .height = 256 },
             .{ .width = 256, .height = 256 },
         }),
@@ -199,12 +199,12 @@ pub fn ExternPointer(T: type) type {
 
 test "ExternPointer" {
     const Desc = extern struct {
-        data: ExternPointer(u8, 4),
+        data: ExternPointer(u8),
     };
 
     const data = try readData();
     const desc: Desc = .{
-        .textures = .init(data),
+        .data = .init(data),
     };
 }
 ```
