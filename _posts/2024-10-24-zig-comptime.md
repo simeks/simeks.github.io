@@ -351,8 +351,7 @@ test {
     defer module.deinit();
 
     const desc: Desc = .{
-        // Decl literals are amazing!
-        .textures = try .init(&{
+        .textures = try .init(&.{
             .{ .width = 256, .height = 256 },
             .{ .width = 256, .height = 256 },
         }),
