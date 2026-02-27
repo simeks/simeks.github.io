@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 300" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="550" y="22" text-anchor="middle" font-size="18" font-weight="700" fill="#111">SVGF — Spatiotemporal Variance-Guided Filtering</text>
+
+  <!-- ===== MAIN PIPELINE (y=85) ===== -->
+
+  <!-- Noisy -->
+  <rect x="40" y="70" width="140" height="50" rx="6" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="110" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Noisy</text>
+
+  <line x1="180" y1="95" x2="235" y2="95" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Temporal -->
+  <rect x="245" y="70" width="140" height="50" rx="6" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="315" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Temporal</text>
+
+  <line x1="385" y1="95" x2="435" y2="95" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Variance -->
+  <rect x="445" y="70" width="140" height="50" rx="6" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="515" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Variance</text>
+
+  <line x1="585" y1="95" x2="635" y2="95" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Spatial -->
+  <rect x="645" y="70" width="140" height="50" rx="6" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="715" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Spatial</text>
+
+  <line x1="785" y1="95" x2="835" y2="95" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Denoised -->
+  <rect x="845" y="70" width="140" height="50" rx="6" fill="none" stroke="#333" stroke-width="2.5"/>
+  <text x="915" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#111">Denoised</text>
+
+  <!-- ===== FEEDBACK: Spatial → Temporal (prev frame) ===== -->
+  <path d="M 715 70 L 715 45 L 315 45 L 315 70" fill="none" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <text x="515" y="38" text-anchor="middle" font-size="10" fill="#777">prev frame (1st spatial iteration)</text>
+
+  <!-- ===== AUXILIARY INPUTS (stacked under Noisy, same x=40, w=140) ===== -->
+
+  <!-- Motion Vectors -->
+  <rect x="40" y="150" width="140" height="44" rx="6" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="110" y="177" text-anchor="middle" font-size="12" font-weight="600" fill="#111">Motion Vectors</text>
+
+  <!-- Motion Vectors → Temporal (right then up) -->
+  <path d="M 180 172 L 325 172 L 325 120" fill="none" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="253" y="165" text-anchor="middle" font-size="9" fill="#777">reprojection</text>
+
+  <!-- Normal + Depth -->
+  <rect x="40" y="214" width="140" height="44" rx="6" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="110" y="241" text-anchor="middle" font-size="12" font-weight="600" fill="#111">Normal + Depth</text>
+
+  <!-- Normal+Depth → Temporal (right then up) -->
+  <path d="M 180 236 L 295 236 L 295 120" fill="none" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- Normal+Depth → Spatial (right then up) -->
+  <path d="M 180 236 L 685 236 L 685 120" fill="none" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- ===== LEGEND ===== -->
+  <line x1="40" y1="282" x2="70" y2="282" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="78" y="286" font-size="10" fill="#555">Data flow</text>
+
+  <line x1="170" y1="282" x2="200" y2="282" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="208" y="286" font-size="10" fill="#555">Auxiliary / feedback</text>
+</svg>

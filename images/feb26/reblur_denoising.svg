@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="22" text-anchor="middle" font-size="18" font-weight="700" fill="#111">ReBLUR — Recurrent Blur Denoiser</text>
+
+  <!-- ===== MAIN PIPELINE (y=70) ===== -->
+
+  <!-- Noisy -->
+  <rect x="40" y="70" width="120" height="50" rx="6" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="100" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Noisy</text>
+
+  <line x1="160" y1="95" x2="200" y2="95" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Pre-Blur -->
+  <rect x="210" y="70" width="120" height="50" rx="6" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="270" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Pre-Blur</text>
+
+  <line x1="330" y1="95" x2="370" y2="95" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Temporal Accumulation -->
+  <rect x="380" y="70" width="120" height="50" rx="6" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="440" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Temporal</text>
+
+  <line x1="500" y1="95" x2="540" y2="95" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- History Fix -->
+  <rect x="550" y="70" width="120" height="50" rx="6" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="610" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#111">History Fix</text>
+
+  <line x1="670" y1="95" x2="710" y2="95" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Blur -->
+  <rect x="720" y="70" width="120" height="50" rx="6" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="780" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Blur</text>
+
+  <line x1="840" y1="95" x2="880" y2="95" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Post-Blur -->
+  <rect x="890" y="70" width="120" height="50" rx="6" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="950" y="100" text-anchor="middle" font-size="13" font-weight="600" fill="#111">Post-Blur</text>
+
+  <line x1="1010" y1="95" x2="1050" y2="95" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Denoised -->
+  <rect x="1060" y="70" width="120" height="50" rx="6" fill="none" stroke="#333" stroke-width="2.5"/>
+  <text x="1120" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#111">Denoised</text>
+
+  <!-- ===== FEEDBACK: Post-Blur → Temporal (prev frame) ===== -->
+  <path d="M 950 70 L 950 42 L 440 42 L 440 70" fill="none" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <text x="695" y="36" text-anchor="middle" font-size="10" fill="#777">prev frame</text>
+
+  <!-- ===== AUXILIARY INPUTS (stacked under Noisy) ===== -->
+
+  <!-- Motion Vectors -->
+  <rect x="40" y="150" width="120" height="44" rx="6" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="100" y="177" text-anchor="middle" font-size="12" font-weight="600" fill="#111">Motion Vectors</text>
+
+  <!-- Motion Vectors → Temporal (right then up) -->
+  <path d="M 160 172 L 450 172 L 450 120" fill="none" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="310" y="165" text-anchor="middle" font-size="9" fill="#777">reprojection</text>
+
+  <!-- Normal + Depth -->
+  <rect x="40" y="214" width="120" height="44" rx="6" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="100" y="241" text-anchor="middle" font-size="12" font-weight="600" fill="#111">Normal + Depth</text>
+
+  <!-- Normal+Depth → Temporal (right then up) -->
+  <path d="M 160 236 L 420 236 L 420 120" fill="none" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- Normal+Depth → Blur (right then up) -->
+  <path d="M 160 236 L 750 236 L 750 120" fill="none" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- Normal+Depth → Post-Blur (right then up) -->
+  <path d="M 160 236 L 920 236 L 920 120" fill="none" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- ===== LEGEND ===== -->
+  <line x1="40" y1="282" x2="70" y2="282" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="78" y="286" font-size="10" fill="#555">Data flow</text>
+
+  <line x1="170" y1="282" x2="200" y2="282" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="208" y="286" font-size="10" fill="#555">Auxiliary / feedback</text>
+</svg>
