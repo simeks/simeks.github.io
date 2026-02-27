@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 138" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">
+
+  <defs>
+    <marker id="a" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <path d="M0,0 L7,2.5 L0,5" fill="#333"/>
+    </marker>
+  </defs>
+
+  <rect width="460" height="138" fill="#fff"/>
+
+  <!-- Left stack -->
+  <rect x="20" y="8" width="110" height="34" rx="4" fill="none" stroke="#222" stroke-width="1.5"/>
+  <text x="75" y="30" text-anchor="middle" fill="#222" font-weight="600">Noisy</text>
+
+  <rect x="20" y="50" width="110" height="34" rx="4" fill="none" stroke="#222" stroke-width="1.5"/>
+  <text x="75" y="72" text-anchor="middle" fill="#222" font-weight="600">History</text>
+
+  <rect x="20" y="92" width="110" height="34" rx="4" fill="none" stroke="#222" stroke-width="1.5"/>
+  <text x="75" y="114" text-anchor="middle" fill="#222" font-size="11">Motion Vectors</text>
+
+  <!-- Middle -->
+  <rect x="195" y="50" width="120" height="34" rx="4" fill="none" stroke="#222" stroke-width="1.5"/>
+  <text x="255" y="72" text-anchor="middle" fill="#222" font-weight="600">Reprojection</text>
+
+  <!-- Right -->
+  <rect x="370" y="8" width="70" height="62" rx="4" fill="none" stroke="#222" stroke-width="1.5"/>
+  <text x="405" y="44" text-anchor="middle" fill="#222" font-weight="600">Blend</text>
+
+  <!-- Noisy → Blend -->
+  <line x1="130" y1="25" x2="366" y2="25" fill="none" stroke="#333" stroke-width="1.2" marker-end="url(#a)"/>
+
+  <!-- History → Reprojection -->
+  <line x1="130" y1="67" x2="191" y2="67" fill="none" stroke="#333" stroke-width="1.2" marker-end="url(#a)"/>
+
+  <!-- Motion Vectors → Reprojection -->
+  <polyline points="130,109 165,109 165,75 191,75" fill="none" stroke="#333" stroke-width="1.2" marker-end="url(#a)"/>
+
+  <!-- Reprojection → Blend -->
+  <polyline points="315,67 345,67 345,55 366,55" fill="none" stroke="#333" stroke-width="1.2" marker-end="url(#a)"/>
+
+  <!-- Blend → out -->
+  <line x1="440" y1="39" x2="455" y2="39" fill="none" stroke="#333" stroke-width="1.2" marker-end="url(#a)"/>
+
+</svg>
